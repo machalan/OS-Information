@@ -5,6 +5,7 @@ import os
 import sys
 import requests
 from requests import get
+import json
 
 # Préparation des variables
  
@@ -224,16 +225,13 @@ print("")
 
 info_du_poste = {}
 
-info_du_poste["Mon IP local"] = mon_ip_local
+info_du_poste['Mon IP local'] = mon_ip_local
 info_du_poste["Mon IP public"] = ip2
 info_du_poste["Fabricant:"] = my_system.Manufacturer
 info_du_poste["Marque:" ] = info_bios.Version
 info_du_poste["Modele:"] = my_system.Model
-
-
-
 info_du_poste["Hostname:"] = my_system.Name
-info_du_poste["Numéro de série:"] = info_bios.SerialNumber
+info_du_poste["Numero de serie:"] = info_bios.SerialNumber
 info_du_poste["System:"] = uname.system           
 info_du_poste["Windows:"] = uname.release        
 info_du_poste["Version de Windows:"] = uname.version       
@@ -248,43 +246,46 @@ info_du_poste["Taille total de la RAM:"] = my_system.TotalPhysicalMemory
 info_du_poste["RAM-1 Taille:"] = memoire_vive_1.Capacity
 info_du_poste["RAM-1 Vitesse:"] = memoire_vive_1.ConfiguredClockSpeed
 info_du_poste["RAM-1 Fabricant ou code Fabricant:"] = memoire_vive_1.Manufacturer
-info_du_poste["RAM-1 Numéro de serie :"] = memoire_vive_1.SerialNumber
+info_du_poste["RAM-1 Numero de serie :"] = memoire_vive_1.SerialNumber
 info_du_poste["RAM-1 Tag :"] = memoire_vive_1.Tag
 info_du_poste["RAM-2 Taille:"] = memoire_vive_2.Capacity
 info_du_poste["RAM-2 Vitesse:"] = memoire_vive_2.ConfiguredClockSpeed
 info_du_poste["RAM-2 Fabricant ou code Fabricant:"] = memoire_vive_2.Manufacturer
-info_du_poste["RAM-2 Numéro de serie :"] = memoire_vive_2.SerialNumber
+info_du_poste["RAM-2 Numero de serie :"] = memoire_vive_2.SerialNumber
 info_du_poste["RAM-2 Tag :"] = memoire_vive_2.Tag
 info_du_poste["disk 1 - Model du disque :"] = disques_1.Model
 info_du_poste["disk 1 - Type interface :"] = disques_1.InterfaceType
-info_du_poste["disk 1 - Numéro de série :"] = disques_1.SerialNumber
+info_du_poste["disk 1 - Numero de serie :"] = disques_1.SerialNumber
 info_du_poste["disk 1 - Taille du disque :"] = disques_1.Size
-info_du_poste["disk 1 - OK ou défaillant :"] = disques_1.Status
+info_du_poste["disk 1 - OK ou defaillant :"] = disques_1.Status
 info_du_poste["disk 2 - Model du disque :"] = disques_2.Model
 info_du_poste["disk 2 - Type interface :"] = disques_2.InterfaceType
-info_du_poste["disk 2 - Numéro de série :"] = disques_2.SerialNumber
+info_du_poste["disk 2 - Numero de serie :"] = disques_2.SerialNumber
 info_du_poste["disk 2 - Taille du disque :"] = disques_2.Size
-info_du_poste["disk 2 - OK ou défaillant :"] = disques_2.Status
+info_du_poste["disk 2 - OK ou defaillant :"] = disques_2.Status
 info_du_poste["Nom de domaine:"] = my_system.Domain
 info_du_poste["Nom de l'utilisateur actuel:"] = my_system.UserName
 info_du_poste["Type de carte Mere:"] = carte_mere.Caption
 info_du_poste["Fabricant de la carte mere:"] = carte_mere.Manufacturer
 info_du_poste["Carte mere remplacable:"] = carte_mere.Replaceable
-info_du_poste["Numéro de serie de la carte mere:"] = carte_mere.SerialNumber
-info_du_poste["Carte réseaux-1 :"] = adaptateur_resaux_1.AdapterType
-info_du_poste["Carte réseaux-1 - Description :"] = adaptateur_resaux_1.Description
-info_du_poste["Carte réseaux-1 - MACAddress :"] = adaptateur_resaux_1.MACAddress
-info_du_poste["Carte réseaux-2 :"] = adaptateur_resaux_2.AdapterType
-info_du_poste["Carte réseaux-2 - Description : "] = adaptateur_resaux_2.Description
-info_du_poste["Carte réseaux-2 - MACAddress :"] = adaptateur_resaux_2.MACAddress
-info_du_poste["Carte réseaux-3 :"] = adaptateur_resaux_3.AdapterType
-info_du_poste["Carte réseaux-3 - Description :"] = adaptateur_resaux_3.Description
-info_du_poste["Carte réseaux-3 - MACAddress :"] = adaptateur_resaux_3.MACAddress
-info_du_poste["Carte réseaux-4 :"] = adaptateur_resaux_4.AdapterType
-info_du_poste["Carte réseaux-4 - Description :"] = adaptateur_resaux_4.Description
-info_du_poste["Carte réseaux-4 - MACAddress :"] = adaptateur_resaux_4.MACAddress
+info_du_poste["Numero de serie de la carte mere:"] = carte_mere.SerialNumber
+info_du_poste["Carte reseaux-1 :"] = adaptateur_resaux_1.AdapterType
+info_du_poste["Carte reseaux-1 - Description :"] = adaptateur_resaux_1.Description
+info_du_poste["Carte reseaux-1 - MACAddress :"] = adaptateur_resaux_1.MACAddress
+info_du_poste["Carte reseaux-2 :"] = adaptateur_resaux_2.AdapterType
+info_du_poste["Carte reseaux-2 - Description : "] = adaptateur_resaux_2.Description
+info_du_poste["Carte reseaux-2 - MACAddress :"] = adaptateur_resaux_2.MACAddress
+info_du_poste["Carte reseaux-3 :"] = adaptateur_resaux_3.AdapterType
+info_du_poste["Carte reseaux-3 - Description :"] = adaptateur_resaux_3.Description
+info_du_poste["Carte reseaux-3 - MACAddress :"] = adaptateur_resaux_3.MACAddress
+info_du_poste["Carte reseaux-4 :"] = adaptateur_resaux_4.AdapterType
+info_du_poste["Carte reseaux-4 - Description :"] = adaptateur_resaux_4.Description
+info_du_poste["Carte reseaux-4 - MACAddress :"] = adaptateur_resaux_4.MACAddress
 
+# Création du fichier json
 
+with open('data.json', 'w') as fp:
+	  fp.write(json.dumps(info_du_poste, indent=4))
 
 
 
