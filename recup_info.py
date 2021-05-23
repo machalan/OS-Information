@@ -1,3 +1,4 @@
+
 # Importer les librairies
 
 import wmi
@@ -53,12 +54,14 @@ def mes_infos():
 	info_du_poste["NumberOfProcessors:"] = my_system.NumberOfProcessors
 	info_du_poste["Nbr processeur logique:"] = processeur.NumberOfLogicalProcessors
 	info_du_poste["Taille total de la RAM:"] = my_system.TotalPhysicalMemory
-	info_du_poste["RAM-1 Taille:"] = memoire_vive_1.Capacity
+	memoire_vive_1_Go = (int(memoire_vive_1.Capacity)/1073741824)
+	info_du_poste["RAM-1 Taille:"] = (round(memoire_vive_1_Go))
 	info_du_poste["RAM-1 Vitesse:"] = memoire_vive_1.ConfiguredClockSpeed
 	info_du_poste["RAM-1 Fabricant ou code Fabricant:"] = memoire_vive_1.Manufacturer
 	info_du_poste["RAM-1 Numero de serie :"] = memoire_vive_1.SerialNumber
 	info_du_poste["RAM-1 Tag :"] = memoire_vive_1.Tag
-	info_du_poste["RAM-2 Taille:"] = memoire_vive_2.Capacity
+	memoire_vive_2_Go = (int(memoire_vive_2.Capacity)/1073741824)
+	info_du_poste["RAM-2 Taille:"] = (round(memoire_vive_2_Go))
 	info_du_poste["RAM-2 Vitesse:"] = memoire_vive_2.ConfiguredClockSpeed
 	info_du_poste["RAM-2 Fabricant ou code Fabricant:"] = memoire_vive_2.Manufacturer
 	info_du_poste["RAM-2 Numero de serie :"] = memoire_vive_2.SerialNumber
@@ -66,12 +69,14 @@ def mes_infos():
 	info_du_poste["disk 1 - Model du disque :"] = disques_1.Model
 	info_du_poste["disk 1 - Type interface :"] = disques_1.InterfaceType
 	info_du_poste["disk 1 - Numero de serie :"] = disques_1.SerialNumber
-	info_du_poste["disk 1 - Taille du disque :"] = disques_1.Size
+	disques_1_taille_Go = (int(disques_1.Size)/1073741824)
+	info_du_poste["disk 1 - Taille du disque :"] = round(disques_1_taille_Go)
 	info_du_poste["disk 1 - OK ou defaillant :"] = disques_1.Status
 	info_du_poste["disk 2 - Model du disque :"] = disques_2.Model
 	info_du_poste["disk 2 - Type interface :"] = disques_2.InterfaceType
 	info_du_poste["disk 2 - Numero de serie :"] = disques_2.SerialNumber
-	info_du_poste["disk 2 - Taille du disque :"] = disques_2.Size
+	disques_2_taille_Go = (int(disques_2.Size)/1073741824)
+	info_du_poste["disk 2 - Taille du disque :"] = round(disques_2_taille_Go)
 	info_du_poste["disk 2 - OK ou defaillant :"] = disques_2.Status
 	info_du_poste["Nom de domaine:"] = my_system.Domain
 	info_du_poste["Nom de l'utilisateur actuel:"] = my_system.UserName
@@ -178,12 +183,16 @@ def afficher_mes_infos():  # N'est utile que pour debuguer
 	print(f"Taille total de la RAM: {my_system.TotalPhysicalMemory}")
 	print("")
 	print(f"RAM-1 Taille: {memoire_vive_1.Capacity}")
+	memoire_vive_1_Go = (int(memoire_vive_1.Capacity)/1073741824)
+	print(f"RAM-1 - Taille de la en Go: {round(memoire_vive_1_Go)}")
 	print(f"RAM-1 Vitesse: {memoire_vive_1.ConfiguredClockSpeed}")
 	print(f"RAM-1 Fabricant ou code Fabricant: {memoire_vive_1.Manufacturer}")
 	print(f"RAM-1 Numéro de serie : {memoire_vive_1.SerialNumber}")
 	print(f"RAM-1 Tag : {memoire_vive_1.Tag}")
 	print("")
 	print(f"RAM-2 Taille: {memoire_vive_2.Capacity}")
+	memoire_vive_2_Go = (int(memoire_vive_2.Capacity)/1073741824)
+	print(f"RAM-2  - Taille en Go: {round(memoire_vive_2_Go)}")
 	print(f"RAM-2 Vitesse: {memoire_vive_2.ConfiguredClockSpeed}")
 	print(f"RAM-2 Fabricant ou code Fabricant: {memoire_vive_2.Manufacturer}")
 	print(f"RAM-2 Numéro de serie : {memoire_vive_2.SerialNumber}")
@@ -203,12 +212,16 @@ def afficher_mes_infos():  # N'est utile que pour debuguer
 	print(f"disk 1 - Type interface : {disques_1.InterfaceType}")
 	print(f"disk 1 - Numéro de série : {disques_1.SerialNumber}")
 	print(f"disk 1 - Taille du disque : {disques_1.Size}")
+	disques_1_taille_Go = (int(disques_1.Size)/1073741824)
+	print(f"disk 1 - Taille du disque en Go: {round(disques_1_taille_Go)}")
 	print(f"disk 1 - OK ou défaillant : {disques_1.Status}")
 	print("")
 	print(f"disk 2 - Model du disque : {disques_2.Model}")
 	print(f"disk 2 - Type interface : {disques_2.InterfaceType}")
 	print(f"disk 2 - Numéro de série : {disques_2.SerialNumber}")
 	print(f"disk 2 - Taille du disque : {disques_2.Size}")
+	disques_2_taille_Go = (int(disques_2.Size)/1073741824)
+	print(f"disk 2 - Taille du disque en Go: {round(disques_2_taille_Go)}")
 	print(f"disk 2 - OK ou défaillant : {disques_2.Status}")
 	print("")
 
@@ -302,5 +315,6 @@ while i <= 5:
 	mes_infos()
 	afficher_mes_infos()
 	print ("voila!")   
+
 
 
